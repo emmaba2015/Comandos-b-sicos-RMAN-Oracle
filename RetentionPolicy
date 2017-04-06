@@ -1,0 +1,23 @@
+
+Entro a RMAN
+  export ORACLE_SID=CTCPROD
+  rman target /
+
+Verifico las politicas de retención
+  RMAN> show retention policy;
+using target database control file instead of recovery catalog
+RMAN configuration parameters for database with db_unique_name CTCPROD are:
+CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 7 DAYS;
+
+Configuro las politicas para que retenga los ultimos 2 dias.
+  RMAN> configure retention policy to recovery window of 2 days;
+old RMAN configuration parameters:
+CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 7 DAYS;
+new RMAN configuration parameters:
+CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 2 DAYS;
+new RMAN configuration parameters are successfully stored
+
+Vuelvo a verificar el cambio
+  RMAN> show retention policy;
+RMAN configuration parameters for database with db_unique_name CTCPROD are:
+CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 2 DAYS;
