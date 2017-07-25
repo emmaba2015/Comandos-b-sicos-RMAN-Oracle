@@ -1,0 +1,16 @@
+--Existen 3 modalidades de crosscheck:
+CROSSCHECK BACKUP;
+CROSSCHECK COPY;
+CROSSCHECK ARCHIVELOG ALL;
+
+-- Eliminando Backups
+delete all obsolete; 
+-- Elimina aquellos backups que son más viejos lo que la retención permite.
+
+delete all expired;
+-- Elimina del catalogo aquellos archivos y backups que ya no están disponibles,
+-- detectados por el crosscheck. (DELETE EXPIRED ARCHIVELOG ALL / DELETE EXPIRED BACKUP)
+delete copy;
+-- Elimina todos los backups de tipo image.
+delete backupset;
+-- Elimina todos los backups de tipo backset. 
