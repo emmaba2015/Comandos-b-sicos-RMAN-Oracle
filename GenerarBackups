@@ -1,0 +1,49 @@
+-- Backups ( ejemplo con base de datos dba11g )
+
+-- Nos conectamos a la base de datos contra el catálogo
+
+export ORACLE_SID=dba11g$ 
+rman target / catalog rman/rman@rman
+Recovery Manager: Release 11.2.0.1.0 - Production on Fri Feb 4 09:55:30 2011
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+connected to target database: DBA11G (DBID=337560195)
+connected to recovery catalog database
+ 
+-- Backup completo de la BBDD (Whole Database Backup)
+
+RMAN> backup as copy database spfile plus archivelog; 
+-- Full Backups
+
+RMAN> backup database spfile plus archivelog; 
+-- Incremental Backups
+-- Level 0 Incremental Backups
+
+RMAN> backup incremental level 0 tablespace users; 
+ 
+-- Differential Incremental Backups
+
+RMAN> backup incremental level 1 tablespace users; 
+-- Cumulative Incremental Backups
+
+RMAN> backup incremental level 1 cumulative tablespace users; 
+-- Comprimir backups
+
+RMAN> backup as compressed backupset format ‘/ubicacion/ rman_%d_s%_t%_%p.bkupset’ tablespace users;   RMAN> backup as compressed backupset users; 
+-- Borrar todos los backups
+
+RMAN> delete backup 
+-- Eliminar los backups obsoletos
+
+RMAN> delete obsolete;
+RMAN retention policy will be applied to the command
+RMAN retention policy is set to recovery window of 1 days
+using channel ORA_DISK_1
+
+-- Backup de toda la base de datos
+
+RMAN> backup database;  
+Backup de un tablespace
+RMAN> backup tablespace tbs_name; 
+Backup de un usuario
+
+RMAN> backup user username; 
