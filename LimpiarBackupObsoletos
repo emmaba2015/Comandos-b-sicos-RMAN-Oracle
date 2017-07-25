@@ -1,0 +1,5 @@
+-- Mantenimiento y limpieza de copias obsoletas:
+
+crosscheck backup;
+delete obsolete;
+YES
