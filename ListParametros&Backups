@@ -1,0 +1,6 @@
+-- Ver los parámetros de configuración:
+show all;
+-- Listar las copias realizadas:
+list backup;
+-- Ver parametros politicas de backup RMAN mediante Sqlplus
+select * from V$RMAN_CONFIGURATION;
