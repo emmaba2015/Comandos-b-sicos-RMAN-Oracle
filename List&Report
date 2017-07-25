@@ -1,0 +1,9 @@
+-- Podemos usar los comandos LIST y REPORT para generar reportes de actividades realizadas con RMAN:
+
+list backup summary;
+list backup by datafile;
+list backup of database;
+list backup of archivelog all;
+list backup of controlfile;
+report obsolete ;
+report need backup ;
