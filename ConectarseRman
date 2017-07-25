@@ -1,0 +1,8 @@
+--  forma más simple de conectarse a RMAN es la siguiente (con el usuario oracle):
+rman target /
+
+-- Si queremos que nuestras actividades se registren en un archivo log:
+rman target /log/ruta/archivo.log
+
+-- Conectarse al catalogo de RMAN de una BBDD determinada
+rman target / catalog rman@rman
