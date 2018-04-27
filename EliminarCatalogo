@@ -1,0 +1,25 @@
+$ rman target=/ catalog rman_user@cadena_conexión
+
+-- Hay que borrar todas las copias antes de eliminar el catálogo de recuperación. Para ello se hace un crosscheck de los backups, 
+seguido de un delete obsolete y un delete expired, con la intención de compactar el repositorio de copias y que no se quede nada en 
+el tintero (la intención es liberar todo el espacio posible):
+
+RMAN> crosscheck backup;
+
+RMAN> delete obsolete;
+
+RMAN> delete expired;
+
+-- Se borran los backups restantes:
+
+RMAN> delete backup;
+
+-- Para comprobar que los deletes han hecho efecto, se puede ejecutar:
+
+RMAN> list backup;
+
+-- Esta consulta no debería devolver ningún fichero.
+
+-- Finalmente, se borra el catálogo:
+
+RMAN> drop catalog;
