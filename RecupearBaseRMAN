@@ -1,0 +1,23 @@
+-- Parar la base de datos.
+SQL> SHUTDOWN IMMEDIATE;
+
+-- Entrar a RMAN.
+$ rman target=/ catalog rman_user@cadena_conexión
+
+RMAN> STARTUP MOUNT;
+
+RMAN> RESTORE DATABASE;
+
+RMAN> RECOVER DATABASE;
+
+RMAN> ALTER DATABASE OPEN RESETLOGS;
+
+RMAN> EXIT;
+
+-- Bajar la base de datos, desde SQLPLUS.
+SQL> SHUTDOWN IMMEDIATE;
+
+-- Levantar la base de datos.
+SQL> CONN / AS SYSDBA
+
+SQL> STARTUP;
