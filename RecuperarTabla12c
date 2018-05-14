@@ -1,0 +1,20 @@
+-- Aclaración : Solo se puede usar a partir de la versión Oracle 12c. En versiones anteriores no se puede aplicar este procedimiento.
+
+
+RECOVER TABLE LOCAL_PDB11.PRODUCTO OF PLUGGABLE DATABASE PDB11
+UNTIL TIME "to_date('28/09/2017 14:13','dd/mm/yyyy hh24:mi')"
+AUXILIARY DESTINATION '/tmp'
+DATAPUMP DESTINATION '/oradump'
+REMAP TABLE 'LOCAL_PDB11'.'PRODUCTO':'PRODUCTO_BAK';
+
+-- Si la tabla, como en este caso, está dentro de una PDB es preciso indicar el nombre de la misma (PDB11 en este ejemplo).
+-- Me acerco lo más posible al momento de la modificación. Si no se sabe, se puede probar un valor de tiempo posterior a la culminación 
+de la copia rman (siempre y cuando, claro está, la modificación haya sido con posterioridad a esa copia; de otra manera habría que ir a 
+una copia anterior).
+-- El AUXILIARY DESTINATION debe tener espacio suficiente como para realizar una restauración del tablespace en el que reside la tabla 
+modificada, del tipo TSPITR (Tablespace Point-in-Time Recovery).
+-- DATAPUMP DESTINATION debe de ser un objeto directorio con permisos de lectura y escritura para SYSTEM.
+-- Finalmente, con REMAP TABLE lo que voy a hacer es indicarle a Oracle que debe importar la tabla. Podría sustituir esta parte por las 
+sentencias DUMP FILE ‘nombre_fichero.dmp’ y NOTABLEIMPORT, en cuyo caso no se realiza la importación y se generaría un fichero, en DATAPUMP DESTINATION, con el export data pump de la tabla.
+Como se observa, no machaco la tabla original, si no que indico se haga la importación en una tabla auxiliar; el trasvase de datos de una 
+a otra lo haré yo posteriormente, o dejaré que el responsable de la aplicación lo haga (o que él me indique como hacerlo).
