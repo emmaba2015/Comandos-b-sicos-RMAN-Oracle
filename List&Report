@@ -1,9 +1,29 @@
 -- Podemos usar los comandos LIST y REPORT para generar reportes de actividades realizadas con RMAN:
 
 list backup summary;
+-- Nos muestra un sumario de todos los backup. Despues podemos ahondar en detalle usando el numero que 
+nos da el PC KEY y ver el contenido especifico de un backup.
+
 list backup by datafile;
 list backup of database;
 list backup of archivelog all;
 list backup of controlfile;
 report obsolete ;
 report need backup ;
+
+LIST BACKUP BY FILE;
+-- Podemos ver una lista de todas la piezas de backup que tenemos disponibles, por datafile, spfile, controlfile , etc.
+
+LIST COPY DATABASE ARCHIVELOG ALL;
+-- Nos mostrara todas las copias disponibles de LOGS disponibles.
+LIST BACKUP OF DATAFILE SUMMARY;
+-- Podemos utilzar para que nos liste un suamario de todo lo disponible.
+
+LIST INCARNATION;
+-- Nos muestra todas las copias incarnation que posemos para una o varias bases.
+
+LIST COPY OF DATABASE SKIP TABLESPACE TEMP;
+-- Por último un listado de los tablespace temporales.
+
+
+
