@@ -1,0 +1,8 @@
+RMAN> delete global script backup_ts_level1_any;
+-- What if you want to create a stored script from a script file in the file system? You can import the file into the catalog. 
+-- Here is an example:
+
+RMAN> create script backup_ts_users from file 'backup_ts_users.rman';
+-- Conversely, you can create a file from a stored script (or export a stored script to a file). Here is an example:
+
+RMAN> print script backup_ts_users to file 'backup_ts_users.rman';
