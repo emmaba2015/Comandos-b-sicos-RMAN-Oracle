@@ -1,0 +1,14 @@
+-- Para ver todos los scripts internos de RMAN
+LIST ALL SCRIPT NAMES;
+
+-- Para ver solo los nombres de scripts globales 
+LIST GLOBAL SCRIPT NAMES;
+
+-- Para visualizar el contenido de un script global:
+
+print global script level0backup;
+
+-- Para visualizar el contenido de un scrip:
+
+print script level0backup;
+
