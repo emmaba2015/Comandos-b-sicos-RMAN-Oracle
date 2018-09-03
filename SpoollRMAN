@@ -1,0 +1,4 @@
+-- Sacar salida de pantalla RMAN con comando spool
+rman> spool log to c:\oracle\yourpath\mylog.log;
+rman> run {execute script myscript;}
+rman> spool log off;
