@@ -1,7 +1,20 @@
-Logging with RMAN msglog
-
-The msglog command is used as follows:
+-- Login usando RMAN msglog
 
 rman msglog='/home/oracle/Documents/PROD_backup.log'
 
-You can also write a shell script to log all RMAN activity using msglog:
+-- Podemos usar el siguiente script con el comando msglog:
+
+#!/bin/bash
+ export ORACLE_HOME=/u01/app/oracle/product/11.2.0/db_1
+ export ORACLE_SID=prim
+ export PATH=$PATH:$ORACLE_HOME/bin
+ export NLS_DATE_FORMAT='DD-MON-YY HH24:MI:SS'
+ export DATE=$(date +%Y-%m-%d)
+ 
+ rman target sys/sys@prim msglog /u01/rman_full_backup_${DATE}.log < 
+ backup database plus archivelog;
+ 
+ exit;
+ 
+ EOF
+ 
