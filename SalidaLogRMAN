@@ -1,0 +1,3 @@
+-- En el siguiente ejemplo ejecutamos RMAN y también redirigimos la salida a un archivo llamado rman.log.
+
+rman TARGET / NOCATALOG xxx/xxx /tmp/rman2.log
