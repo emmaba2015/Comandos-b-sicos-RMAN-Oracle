@@ -1,0 +1,7 @@
+Logging with RMAN msglog
+
+The msglog command is used as follows:
+
+rman msglog='/home/oracle/Documents/PROD_backup.log'
+
+You can also write a shell script to log all RMAN activity using msglog:
