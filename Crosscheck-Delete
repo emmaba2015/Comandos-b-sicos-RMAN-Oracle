@@ -1,0 +1,36 @@
+-- To crosscheck all backups use:
+RMAN> CROSSCHECK BACKUP;
+
+-- To list any expired backups detected by the CROSSCHECK command use:
+RMAN> LIST EXPIRED BACKUP;
+
+-- To delete any expired backups detected by the CROSSCHECK command use:
+RMAN> DELETE EXPIRED BACKUP;
+
+-- To crosscheck all archive logs use:
+RMAN> CROSSCHECK ARCHIVELOG ALL;
+
+-- To list all expired archive logs detected by the CROSSCHECK command use:
+RMAN> LIST EXPIRED ARCHIVELOG ALL;
+
+-- To delete all expired archive logs detected by the CROSSCHECK command use:
+RMAN> DELETE EXPIRED ARCHIVELOG ALL;
+
+-- To crosscheck all datafile image copies use:
+RMAN> CROSSCHECK DATAFILECOPY ALL;
+
+-- To list expired datafile copies use:
+RMAN> LIST EXPIRED DATAFILECOPY ALL;
+
+-- To delete expired datafile copies use:
+RMAN> DELETE EXPIRED DATAFILECOPY ALL;
+
+-- To crosscheck all backups of the USERS tablespace use:
+RMAN> CROSSCHECK BACKUP OF TABLESPACE USERS;
+
+-- To list expired backups of the USERS tablespace:
+RMAN> LIST EXPIRED BACKUP OF TABLESPACE USERS;
+
+-- To delete expired backups of the USERS tablespace:
+RMAN> DELETE EXPIRED BACKUP OF TABLESPACE USERS;
+
