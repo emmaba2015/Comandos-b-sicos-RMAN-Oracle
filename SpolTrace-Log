@@ -1,0 +1,11 @@
+ --Fuera de un bloque de ejecucion de RMAN
+ 
+ $ rman target / debug=all trace=rman.trc log=rman.log
+ --Dentro de un bloque de ejecucion de RMAN
+ 
+ $ rman target /RMAN> spool log to rman.log
+ RMAN> spool trace to rman.trc
+ RMAN> run{debug on;
+ backup datafile 4;
+ debug off;}
+ RMAN> spool trace off;RMAN> spool log off;
