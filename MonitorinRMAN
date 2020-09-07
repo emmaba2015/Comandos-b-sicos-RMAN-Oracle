@@ -1,0 +1,50 @@
+-- Ver si nuestro proceso de RMAN se encuentra activo
+ps -fea | grep rman
+
+
+-- Salida ouput RMAN
+select
+ sid, output
+from
+ v$rman_output;
+ 
+ 
+-- Obtener el valor sid, puede obtener más información sobre esta sesión en la vista de sesión v$:
+
+select
+ sid, row_type, operation, status, to_char(start_time,'dd-mm-yyyy
+hh24:mi:ss') start_time, to_char(end_time,'dd-mm-yyyy hh24:mi:ss')
+end_time
+from
+ v$rman_status;
+
+select
+ sid, username, osuser, terminal, program, action from v$session where
+ sid=159;
+
+-- Edite trunc (sysdate) para el DÍA que necesita para ver los detalles de la copia de seguridad
+
+select to_char(START_TIME,’DD MON YY HH24:Mi’) START_TIME ,
+to_char(END_TIME,’DD MON YY HH24:Mi’) END_TIME ,
+OUTPUT_BYTES/1000000  PROCESSED_IN_MB,STATUS
+from v$rman_status where trunc(START_TIME)= trunc(sysdate)
+
+-- Quiero ver si mis copias de seguridad aumentan con el tiempo.
+
+select trunc(START_TIME),sum(OUTPUT_BYTES)/1000000  PROCESSED_IN_MB
+from v$rman_status where STATUS =’COMPLETED’
+group by trunc(START_TIME)
+order by 1 desc
+
+-- Cuánto espacio de disco han utilizado las copias de seguridad
+
+select sum(OUTPUT_BYTES)/1000000  PROCESSED_IN_MB
+from v$rman_status where STATUS =’COMPLETED’
+
+-- Para ver si nuestro restore backup presenta errores
+
+select to_char(START_TIME,’DD MON YY HH24:Mi’) START_TIME ,STATUS,OPERATION
+from v$rman_status where STATUS like ‘%ERROR%’
+order by 1 desc;
+
+
