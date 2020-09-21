@@ -1,0 +1,32 @@
+-- Validar backup
+
+BACKUP VALIDATE CHECK LOGICAL DATABASE ARCHIVELOG ALL;
+RMAN> VALIDATE DATAFILE 1;
+RMAN> VALIDATE DATAFILE '/u01/app/oracle/oradata/ORCL/system01.dbf';
+
+RMAN> VALIDATE CHECK LOGICAL DATAFILE 1;
+RMAN> VALIDATE CHECK LOGICAL DATAFILE '/u01/app/oracle/oradata/ORCL/system01.dbf';
+
+RMAN> VALIDATE TABLESPACE users;
+RMAN> VALIDATE CHECK LOGICAL TABLESPACE users;
+
+RMAN> VALIDATE DATABASE;
+RMAN> VALIDATE CHECK LOGICAL DATABASE;
+
+-- Simular restore backup
+RMAN> RESTORE DATABASE VALIDATE;
+RMAN> RESTORE ARCHIVELOG ALL VALIDATE;
+
+run
+{
+set until time
+restore database preview;
+}
+
+run
+{
+set until time
+restore database validate;
+}
+
+
